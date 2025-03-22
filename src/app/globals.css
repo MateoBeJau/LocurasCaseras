@@ -1,26 +1,137 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 255, 251, 235;
+  --background-end-rgb: 254, 243, 199;
+  --navbar-height: 80px; /* Altura fija para el navbar */
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+    to bottom,
+    rgb(var(--background-start-rgb)),
+    rgb(var(--background-end-rgb))
+  );
+  min-height: 100vh;
+}
+
+/* Ajuste para el contenido debajo del navbar */
+main section {
+  scroll-margin-top: var(--navbar-height);
+  padding-top: var(--navbar-height);
+}
+
+main section:first-child {
+  padding-top: 0; /* El hero no necesita padding superior */
+}
+
+/* Animación de brillo */
+@keyframes shine {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(200%);
+  }
+}
+
+.animate-shine {
+  animation: shine 2s infinite;
+}
+
+/* Mejoras en la interactividad */
+.interactive-hover {
+  @apply transition-all duration-300 hover:scale-105 hover:shadow-lg;
+}
+
+.glass-effect {
+  @apply backdrop-blur-md bg-white/80;
+}
+
+/* Efectos de desplazamiento suave */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Mejoras en la tipografía */
+h1, h2, h3, h4, h5, h6 {
+  @apply tracking-tight;
+}
+
+/* Estilos para efectos de parallax */
+.parallax {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.parallax-layer {
+  transform: translateZ(0);
+  transition: transform 0.5s ease-out;
+}
+
+/* Estilos para animaciones suaves */
+.fade-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+/* Estilos para efectos de hover */
+.hover-lift {
+  @apply transition-all duration-300;
+}
+
+.hover-lift:hover {
+  @apply transform -translate-y-1 shadow-lg;
+}
+
+/* Estilos para texturas y patrones */
+.texture-dots {
+  background-image: radial-gradient(currentColor 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.texture-grid {
+  background-image: linear-gradient(currentColor 1px, transparent 1px),
+    linear-gradient(to right, currentColor 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Estilos para bordes decorativos */
+.border-pattern {
+  position: relative;
+}
+
+.border-pattern::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(45deg, #f59e0b, #d97706);
+  border-radius: inherit;
+  z-index: -1;
+}
+
+@layer base {
+  body {
+    @apply bg-cream-50 text-secondary-800;
+  }
+}
+
+@layer components {
+  .shadow-warm {
+    box-shadow: 0 4px 14px 0 rgba(106, 59, 40, 0.1);
+  }
+  
+  .shadow-warm-lg {
+    box-shadow: 0 10px 25px 0 rgba(106, 59, 40, 0.15);
+  }
 }
