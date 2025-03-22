@@ -25,7 +25,7 @@ export function Hero() {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-              Delicias Caseras
+              Locuras Caseras
               <br />
               <span className="text-primary-200">Hechas con Amor</span>
             </h1>
